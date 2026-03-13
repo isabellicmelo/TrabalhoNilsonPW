@@ -7,7 +7,7 @@ namespace AplicacaoBanco.Models
     public class Usuario
     {
         [Display(Name="Código")]
-        public int? IdUsu { get; set; }
+        public int IdUsu { get; set; }
 
         [Display(Name = "Nome Completo")]
         [Required(ErrorMessage = "O campo nome é obrigatório")]
@@ -19,8 +19,8 @@ namespace AplicacaoBanco.Models
 
         [Display(Name = "Nascimento")]
         [Required(ErrorMessage = "O campo nascimento é obrigatório")]
-        [DataType(DataType.DateTime)]
-        public DataSetDateTime DataNasc { get; set; }
+        //[DataType(DataType.DateTime)]
+        public DateTime DataNasc { get; set; }
     }
     
 }

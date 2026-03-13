@@ -1,4 +1,5 @@
-﻿using AplicacaoBanco.Repository.Contract;
+﻿using AplicacaoBanco.Models;
+using AplicacaoBanco.Repository.Contract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AplicacaoBanco.Controllers
@@ -17,7 +18,7 @@ namespace AplicacaoBanco.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CadastrarUsuario(UsuarioController usuario)
+        public IActionResult CadastrarUsuario(Usuario usuario)
         {
             if(ModelState.IsValid)
             {

@@ -2,7 +2,7 @@ using AplicacaoBanco.Repository;
 using AplicacaoBanco.Repository.Contract;
 
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
