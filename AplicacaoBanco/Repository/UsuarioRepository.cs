@@ -15,7 +15,18 @@ namespace AplicacaoBanco.Repository
         }
         public void Atualizar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            using(var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("Update usuario set nomeUsu=@nomeUsu, Cargo=@Cargo, " + " DataNASC=@DataNasc where IdUsu=@IdUsu;", conexao);
+
+                cmd.Parameters.Add("@nomeUsu", MySqlDbType.VarChar).Value = usuario.nomeUsu;
+                cmd.Parameters.Add("@Cargo", MySqlDbType.VarChar).Value = usuario.Cargo;
+                cmd.Parameters.Add("@DataNasc", MySqlDbType.VarChar).Value = usuario.DataNasc.ToString("yyyy/MM/dd");
+                cmd.Parameters.Add("@IdUsu", MySqlDbType.VarChar).Value = usuario.IdUsu;
+                cmd.ExecuteNonQuery();
+                conexao.Close();
+            }
         }
 
         public void Cadastrar(Usuario usuario)
@@ -39,7 +50,14 @@ namespace AplicacaoBanco.Repository
 
         public void Excluir(int Id)
         {
-            throw new NotImplementedException();
+            using(var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("delete from usuario where IdUsu=@IdUsu", conexao);
+                cmd.Parameters.AddWithValue("@IdUsu", Id);
+                int i = cmd.ExecuteNonQuery();
+                conexao.Close();
+            }
         }
 
         public IEnumerable<Usuario> ObterTodosUsuarios()

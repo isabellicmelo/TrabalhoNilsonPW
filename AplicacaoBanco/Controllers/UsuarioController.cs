@@ -31,5 +31,34 @@ namespace AplicacaoBanco.Controllers
         {
             return View(_usuarioRepository.ObterTodosUsuarios());
         }
+
+        [HttpGet]
+        public IActionResult AtualizarUsuario(int id)
+        {
+            return View(_usuarioRepository.ObterUsuario(id));
+        }
+        [HttpPost]
+        public IActionResult AtualizarUsuario(Usuario usuario)
+        {
+            _usuarioRepository.Atualizar(usuario);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ExcluirUsuario(int id)
+        {
+            _usuarioRepository.Excluir(id);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public IActionResult DetalhesUsuario(int id)
+        {
+            return View(_usuarioRepository.ObterUsuario(id));
+        }
+        [HttpPost]
+        public IActionResult DetalhesUsuario(Usuario usuario)
+        {
+            _usuarioRepository.Atualizar(usuario);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

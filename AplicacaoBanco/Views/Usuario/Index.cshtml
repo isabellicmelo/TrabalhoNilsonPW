@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Cargo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataNasc)
+                @item.DataNasc.ToString("dd/MM/yyyy")
             </td>
             <td>
                 <button type="button" class="btn btn-warning">
@@ -54,6 +54,7 @@
                 new{ onclick = "return confirm('Deseja realmente desativar?');"})
                 </button>
             </td>
+
         </tr>
 }
     </tbody>
