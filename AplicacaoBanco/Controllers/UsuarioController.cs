@@ -23,12 +23,13 @@ namespace AplicacaoBanco.Controllers
             if(ModelState.IsValid)
             {
                 _usuarioRepository.Cadastrar(usuario);
+                return RedirectToAction("Index", "Home");
             }
-            return View();
+            return View(usuario);
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_usuarioRepository.ObterTodosUsuarios());
         }
     }
 }

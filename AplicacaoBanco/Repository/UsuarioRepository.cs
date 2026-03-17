@@ -2,6 +2,7 @@
 using AplicacaoBanco.Models;
 using AplicacaoBanco.Repository.Contract;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace AplicacaoBanco.Repository
 {
@@ -43,12 +44,55 @@ namespace AplicacaoBanco.Repository
 
         public IEnumerable<Usuario> ObterTodosUsuarios()
         {
-            throw new NotImplementedException();
+            List<Usuario> UsuarioList = new List<Usuario>();
+            using(var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("Select * from usuario", conexao);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                conexao.Clone();
+
+                foreach(DataRow dr in dt.Rows)
+                {
+                    UsuarioList.Add(
+                        new Usuario
+                        {
+                            IdUsu = Convert.ToInt32(dr["IdUsu"]),
+                            nomeUsu = (string)dr["nomeUsu"],
+                            Cargo = (string)dr["Cargo"],
+                            DataNasc = Convert.ToDateTime(dr["DataNasc"])
+                        });
+                }
+                return UsuarioList;
+            }
         }
 
         public Usuario ObterUsuario(int Id)
         {
-            throw new NotImplementedException();
+            using(var conexao = new MySqlConnection(_conexaoMySQL))
+            {
+                conexao.Open();
+                MySqlCommand cmd = new MySqlCommand("Select * from usuario " + " where IdUsu=@IdUsu", conexao);
+
+                cmd.Parameters.AddWithValue("@IdUsu", Id);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                MySqlDataReader dr;
+
+                Usuario usuario = new Usuario();
+                dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                while (dr.Read())
+                {
+                    usuario.IdUsu = Convert.ToInt32(dr["IdUsu"]);
+                    usuario.nomeUsu = (string)(dr["nomeUsu"]);
+                    usuario.Cargo = (string)(dr["Cargo"]);
+                    usuario.DataNasc = Convert.ToDateTime(dr["DataNasc"]);
+                }
+                return usuario;
+            }
         }
     }
 }
