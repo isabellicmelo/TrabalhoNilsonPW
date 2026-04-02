@@ -34,7 +34,7 @@ namespace AplicacaoBanco.Repository
             using(var conexao = new MySqlConnection(_conexaoMySQL))
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("insert into usuario(nomeUsu, Cargo, DataNasc)" + "values (@nomeUsu, @Cargo, @DataNasc)", conexao);
+                MySqlCommand cmd = new MySqlCommand("insert into tbUsuario(nomeUsu, Cargo, DataNasc)" + "values (@nomeUsu, @Cargo, @DataNasc)", conexao);
                 cmd.Parameters.Add("@nomeUsu", MySqlDbType.VarChar).Value = usuario.nomeUsu;
                 cmd.Parameters.Add("@Cargo", MySqlDbType.VarChar).Value = usuario.Cargo;
                 cmd.Parameters.Add("@DataNasc", MySqlDbType.VarChar).Value = usuario.DataNasc.ToString("yyyy/MM/dd");
@@ -66,7 +66,7 @@ namespace AplicacaoBanco.Repository
             using(var conexao = new MySqlConnection(_conexaoMySQL))
             {
                 conexao.Open();
-                MySqlCommand cmd = new MySqlCommand("Select * from usuario", conexao);
+                MySqlCommand cmd = new MySqlCommand("Select * from tbUsuario", conexao);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 DataTable dt = new DataTable();

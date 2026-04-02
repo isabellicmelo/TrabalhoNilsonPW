@@ -18,10 +18,17 @@ namespace AplicacaoBanco.Repository
         {
             try
             {
+<<<<<<< HEAD
                 using (var conexao = new MySqlCommand(_conexaoMySQL))
                 {
                     conexao.Open();
 
+=======
+                using (var conexao = new MySqlConnection(_conexaoMySQL))
+                {
+                    conexao.Open();
+                    
+>>>>>>> a6b7d77 (subindo atualizações endereço)
                     MySqlCommand cmd = new MySqlCommand("insert into endereco( CEP, Estado, Cidade, Bairro, " +
                         "Logradouro, Complemento, Numero)" +
                      "values (@CEP, @Estado, @Cidade, @Bairro, @Logradouro @Complemento, @Numero )", conexao);
@@ -41,8 +48,19 @@ namespace AplicacaoBanco.Repository
 
             }
 
+<<<<<<< HEAD
              catch (MySql)
             
+=======
+             catch (MySqlException ex)
+            {
+                throw new Exception("Erro no banco em cadastro cliente" + ex.Message);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro na aplicação em cadastro cliente");
+            }
+>>>>>>> a6b7d77 (subindo atualizações endereço)
         }
 
         public void Atualizar(Endereco endereco)

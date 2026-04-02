@@ -2,11 +2,12 @@ using AplicacaoBanco.Repository;
 using AplicacaoBanco.Repository.Contract;
 
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 var app = builder.Build();
